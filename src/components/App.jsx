@@ -1,32 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { nanoid } from 'nanoid';
 import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
+import { setFilter, addContact, deleteContact } from '../store/contactSlice';
 import { AppSection, TitleOne } from './APP.styled';
 
 export const App = () => {
-  const [contacts, setContacts] = useState([
-    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-  ]);
-
-  const [filter, setFilter] = useState('');
-
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
+  const contacts = useSelector(state => state.contacts.contacts);
+  const filter = useSelector(state => state.contacts.filter);
+  const dispatch = useDispatch();
 
   const inputChangeValue = evt => {
     const { value } = evt.target;
-    setFilter(value);
+    dispatch(setFilter(value));
   };
 
-  const formSubmitHandler = data => {
-    setContacts(prevContacts => [{ id: nanoid(), ...data }, ...prevContacts]);
-  };
+  // const formSubmitHandler = data => {
+  //   dispatch(addContact({ id: nanoid(), ...data }));
+  // };
 
   const calculateFilteredContacts = () => {
     const normalizedFilter = filter.toLowerCase();
@@ -38,18 +31,14 @@ export const App = () => {
   const formSubmitSearchHandler = data => {
     const searchResult = contacts.find(contact => contact.name === data.name);
     if (!searchResult) {
-      formSubmitHandler(data);
-      return true;
+      dispatch(addContact({ id: nanoid(), ...data }));
     } else {
       alert(`${data.name} is already in contacts`);
-      return false;
     }
   };
 
   const deleteItem = contactId => {
-    setContacts(prevContacts =>
-      prevContacts.filter(item => item.id !== contactId)
-    );
+    dispatch(deleteContact(contactId));
   };
 
   const visibleContacts = calculateFilteredContacts();
