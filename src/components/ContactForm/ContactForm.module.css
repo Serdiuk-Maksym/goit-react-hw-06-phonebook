@@ -1,0 +1,40 @@
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: 60px;
+  width: 900px;
+  height: 50px;
+  background-color: #f4f4fd;
+}
+.input {
+  height: 80%;
+}
+.input:focus,
+.input:hover {
+  outline: #4d5ae5;
+  border-color: #4d5ae5;
+}
+.btn {
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+
+  color: #fff;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.64px;
+
+  border-radius: 4px;
+  background: #4d5ae5;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+}
+.btn:hover,
+.btn:focus {
+  background: #404bbf;
+}

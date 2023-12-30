@@ -1,0 +1,30 @@
+.contact {
+  display: flex;
+  width: 500px;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30px;
+  font-weigth: 600;
+}
+
+.btn {
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+
+  color: #fff;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.64px;
+
+  border-radius: 4px;
+  background: #4d5ae5;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+}
+.btn:hover,
+.btn:focus {
+  background: #404bbf;
+}
