@@ -5,6 +5,7 @@ import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
 import { setFilter, addContact, deleteContact } from '../store/contactSlice';
+import { calculateFilteredContacts } from '../utils/contactUtils';
 import { AppSection, TitleOne } from './APP.styled';
 
 export const App = () => {
@@ -15,17 +16,6 @@ export const App = () => {
   const inputChangeValue = evt => {
     const { value } = evt.target;
     dispatch(setFilter(value));
-  };
-
-  // const formSubmitHandler = data => {
-  //   dispatch(addContact({ id: nanoid(), ...data }));
-  // };
-
-  const calculateFilteredContacts = () => {
-    const normalizedFilter = filter.toLowerCase();
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter)
-    );
   };
 
   const formSubmitSearchHandler = data => {
