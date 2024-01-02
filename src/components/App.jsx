@@ -5,7 +5,6 @@ import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
 import { setFilter, addContact, deleteContact } from '../store/contactSlice';
-import { calculateFilteredContacts } from '../utils/contactUtils';
 import { AppSection, TitleOne } from './APP.styled';
 
 export const App = () => {
@@ -31,15 +30,17 @@ export const App = () => {
     dispatch(deleteContact(contactId));
   };
 
-  const visibleContacts = calculateFilteredContacts();
-
   return (
     <AppSection>
       <TitleOne>PhoneBook</TitleOne>
       <ContactForm onSubmitHandler={formSubmitSearchHandler} />
       <h2>Contacts</h2>
       <Filter filter={filter} onChange={inputChangeValue} />
-      <ContactList list={visibleContacts} onDeleteItem={deleteItem} />
+      <ContactList
+        contacts={contacts}
+        filter={filter}
+        onDeleteItem={deleteItem}
+      />
     </AppSection>
   );
 };
