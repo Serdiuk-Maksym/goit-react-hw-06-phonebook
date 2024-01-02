@@ -5,6 +5,7 @@ import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
 import { setFilter, addContact, deleteContact } from '../store/contactSlice';
+import * as ReduxFunctions from '../store/reduxFunctions';
 import { AppSection, TitleOne } from './APP.styled';
 
 export const App = () => {
@@ -12,23 +13,14 @@ export const App = () => {
   const filter = useSelector(state => state.contacts.filter);
   const dispatch = useDispatch();
 
-  const inputChangeValue = evt => {
-    const { value } = evt.target;
-    dispatch(setFilter(value));
-  };
-
-  const formSubmitSearchHandler = data => {
-    const searchResult = contacts.find(contact => contact.name === data.name);
-    if (!searchResult) {
-      dispatch(addContact({ id: nanoid(), ...data }));
-    } else {
-      alert(`${data.name} is already in contacts`);
-    }
-  };
-
-  const deleteItem = contactId => {
-    dispatch(deleteContact(contactId));
-  };
+  const inputChangeValue = ReduxFunctions.setFilterValue(dispatch, setFilter);
+  const formSubmitSearchHandler = ReduxFunctions.handleFormSubmit(
+    dispatch,
+    addContact,
+    contacts,
+    nanoid
+  );
+  const deleteItem = ReduxFunctions.handleDeleteItem(dispatch, deleteContact);
 
   return (
     <AppSection>
