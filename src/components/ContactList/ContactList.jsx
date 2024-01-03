@@ -5,8 +5,10 @@ import { Contact } from 'components/Contact/Contact';
 export function ContactList({ contacts, filter, onDeleteItem }) {
   const calculateFilteredContacts = (contacts, filter) => {
     const normalizedFilter = filter.toLowerCase();
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter)
+    return contacts.filter(
+      contact =>
+        typeof contact.name === 'string' &&
+        contact.name.toLowerCase().includes(normalizedFilter)
     );
   };
 
