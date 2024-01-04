@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import css from './Filter.module.css';
 
 export const Filter = ({ filter, onChange }) => {
+  const handleChange = event => {
+    onChange(event.target.value);
+  };
+
   return (
     <div className={css.filter}>
       <label className={css.label}>
@@ -12,7 +16,7 @@ export const Filter = ({ filter, onChange }) => {
           type="text"
           name="filter"
           value={filter}
-          onChange={onChange}
+          onChange={handleChange}
         />
       </label>
     </div>

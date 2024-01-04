@@ -25,7 +25,7 @@ export function ContactList({ contacts, filter, onDeleteItem }) {
 
 ContactList.propTypes = {
   contacts: PropTypes.arrayOf(PropTypes.object.isRequired),
-  filter: PropTypes.string,
+  filter: PropTypes.string.isRequired,
   onDeleteItem: PropTypes.func,
 };
 
